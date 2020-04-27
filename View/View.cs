@@ -17,12 +17,12 @@ namespace Game2048_View
         public View(Model model)
         {
             this.model = model;
-            this.messageY = vCellSize * model.Size + 1;
+            this.messageY = vCellSize * model.VSize + 1;
         }
         public void Display()
         {
             Console.Clear();
-            ShowGrid(model.Size);
+            ShowGrid(model.HSize, model.VSize);
             Console.SetCursorPosition(0, this.messageY);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Управляйте клавишами стрелок. Для выхода нажмите Esc. Для перезапуска игры нажмите F5.");
@@ -42,10 +42,10 @@ namespace Game2048_View
             Console.WriteLine("Ходов больше нет! Для выхода нажмите Esc. Для перезапуска игры нажмите F5.             ");
         }
 
-        private void ShowGrid(int size)
+        private void ShowGrid(int hSize, int vSize)
         {
-            for (int i = 0; i < size; i++)
-                for (int j = 0; j < size; j++)
+            for (int i = 0; i < hSize; i++)
+                for (int j = 0; j < vSize; j++)
                 {
                     ShowGridCell(i, j);
                 }

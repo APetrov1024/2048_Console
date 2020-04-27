@@ -11,23 +11,39 @@ namespace Game2048_Model
     {
         public enum Directions { Left, Right, Up, Down };
         private Field field;
-        private Random rndNum;
+        private Random rndNum = new Random();
         private bool isMoved;
 
 
-        public int Size
+        public int HSize
         {
             get
             {
                 return this.field.HSize;
             }
         }
-
+        public int VSize
+        {
+            get
+            {
+                return this.field.VSize;
+            }
+        }
 
         public Model(int fieldSize)
         {
-            rndNum = new Random();
             this.field = new Field(fieldSize);
+            InitField();
+        }
+
+        public Model(int hFieldSize, int vFieldSize)
+        {
+            this.field = new Field(hFieldSize, vFieldSize);
+            InitField();
+        }
+
+        private void InitField()
+        {
             this.field.Clear();
             GenerateNewTile();
             GenerateNewTile();
@@ -35,9 +51,7 @@ namespace Game2048_Model
 
         public void ClearField()
         {
-            this.field.Clear();
-            GenerateNewTile();
-            GenerateNewTile();
+            InitField();
         }
 
         public int Get(Coordinates coords)
