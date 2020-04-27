@@ -284,24 +284,20 @@ namespace Game2048_Model
 
         private void GenerateNewTile()
         {
-            bool isSuccess = false;
-            int horCoord, vertCoord;
-            int newValue;
-            if (rndNum.Next(0, 100) <= 70)
-                newValue = 2;
-            else
-                newValue = 4;
-            while (!isSuccess)
+            List<Coordinates> EmptyTilesCoords = this.field.FindEmptyCells();
+            if (EmptyTilesCoords.Count() > 0)
             {
-                horCoord = rndNum.Next(0, this.Size);
-                vertCoord = rndNum.Next(0, this.Size);
-                if (this.field.Get(new Coordinates(horCoord, vertCoord)) == 0)
-                {
-                    this.field.Set(new Coordinates(horCoord, vertCoord), newValue);
-                    isSuccess = true;
-                }
+                Coordinates newCellCoords = EmptyTilesCoords[rndNum.Next(0, EmptyTilesCoords.Count() - 1)];
+                int newValue;
+                if (rndNum.Next(0, 100) <= 70)
+                    newValue = 2;
+                else
+                    newValue = 4;
+                this.field.Set(newCellCoords, newValue);
             }
+
         }
 
+     
     }
 }
