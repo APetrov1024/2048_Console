@@ -45,11 +45,6 @@ namespace Game2048_Model
             return this.field.Get(coords);
         }
 
-        /*public void Set(Coordinates coords, int value)
-        {
-            this.field.Set(coords, value);
-        }*/
-
         public void Action(Directions direction)
         {
             this.isMoved = false;
@@ -74,7 +69,8 @@ namespace Game2048_Model
                     int curValue = this.field.Get(new Coordinates(i, j));
                     for (int k = i - 1; k <= i + 1; k++)
                         for (int n = j - 1; n <= j + 1; n++)
-                            if (k != n)
+                            if ((k == i && ((n == i - 1) || (n == i + 1))) || 
+                                (n == j && ((k == j - 1) || (k == j + 1))))
                             {
                                 Coordinates neighborCoord = new Coordinates(n, k);
                                 if (this.field.IsOnField(neighborCoord) && (this.field.Get(neighborCoord) == curValue))
