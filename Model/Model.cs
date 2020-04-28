@@ -73,6 +73,24 @@ namespace Game2048_Model
             return this.field.HaveCellWithValue(value);
         }
 
+        private bool IsTileCanBeMerged(Coordinates coords)
+        {
+            List<int> neighbors = new List<int>();
+            if (coords.Horizontal - 1 >= 0) 
+                neighbors.Add(this.field.Get(new Coordinates(coords.Horizontal - 1, coords.Vertical)));
+            if (coords.Horizontal + 1 < this.HSize) 
+                neighbors.Add(this.field.Get(new Coordinates(coords.Horizontal + 1, coords.Vertical)));
+            if (coords.Vertical - 1 >= 0) 
+                neighbors.Add(this.field.Get(new Coordinates(coords.Horizontal, coords.Vertical - 1)));
+            if (coords.Vertical + 1 < this.VSize) 
+                neighbors.Add(this.field.Get(new Coordinates(coords.Horizontal, coords.Vertical + 1)));
+            int curValue = this.field.Get(coords);
+            foreach (int value in neighbors)
+                if (value == curValue)
+                    return true;
+            return false;
+        }
+
         public bool IsHasNotMoves()
         {
             if (this.field.HaveEmptyCells())
@@ -80,16 +98,8 @@ namespace Game2048_Model
             for (int i = 0; i < this.field.HSize; i++)
                 for (int j = 0; j < this.field.VSize; j++)
                 {
-                    int curValue = this.field.Get(new Coordinates(i, j));
-                    for (int k = i - 1; k <= i + 1; k++)
-                        for (int n = j - 1; n <= j + 1; n++)
-                            if ((k == i && ((n == i - 1) || (n == i + 1))) || 
-                                (n == j && ((k == j - 1) || (k == j + 1))))
-                            {
-                                Coordinates neighborCoord = new Coordinates(n, k);
-                                if (this.field.IsOnField(neighborCoord) && (this.field.Get(neighborCoord) == curValue))
-                                    return false;
-                            }
+                    if (IsTileCanBeMerged(new Coordinates(i, j)))
+                        return false;
                 }
             return true;
         }
