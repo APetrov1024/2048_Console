@@ -53,19 +53,22 @@ namespace Game2048_View
 
         private void ShowGridCell(int left, int top)
         {
-            for (int i = 0; i < hCellSize; i++)
-                for (int j = 0; j < vCellSize; j++)
+            for (int i = 0; i < this.hCellSize; i++)
+                for (int j = 0; j < this.vCellSize; j++)
                 {
-                    if (i == 0 || j == 0 || i == hCellSize - 1 || j == vCellSize - 1)
+                    if (i == 0 || j == 0 || i == this.hCellSize - 1 || j == this.vCellSize - 1)
                     {
                         Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.SetCursorPosition(left * (hCellSize - 1) + i, top * (vCellSize - 1) + j);
+                        Console.SetCursorPosition(left * (this.hCellSize - 1) + i, top * (this.vCellSize - 1) + j);
                         Console.Write("*");
-                        if (model.Get(new Coordinates(left, top)) > 0)
+                        if (this.model.Get(new Coordinates(left, top)) > 0)
                         {
+                            Coordinates displayedValueCoords = new Coordinates(left, top);
                             Console.ForegroundColor = ConsoleColor.Green;
+                            if (this.model.LastGeneratedTileCoords.Equals(displayedValueCoords))
+                                Console.ForegroundColor = ConsoleColor.Red;
                             Console.SetCursorPosition(left * (hCellSize - 1) + 2, top * (vCellSize - 1) + 2);
-                            Console.Write(model.Get(new Coordinates(left, top)));
+                            Console.Write(this.model.Get(displayedValueCoords));
                         }
                     }
                 }

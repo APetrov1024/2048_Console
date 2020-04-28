@@ -14,7 +14,7 @@ namespace Game2048_Model
         private Random rndNum = new Random();
         private bool isMoved;
 
-
+        public Coordinates LastGeneratedTileCoords { get; private set; }
         public int HSize
         {
             get
@@ -33,12 +33,14 @@ namespace Game2048_Model
         public Model(int fieldSize)
         {
             this.field = new Field(fieldSize);
+            this.LastGeneratedTileCoords = new Coordinates();
             InitField();
         }
 
         public Model(int hFieldSize, int vFieldSize)
         {
             this.field = new Field(hFieldSize, vFieldSize);
+            this.LastGeneratedTileCoords = new Coordinates();
             InitField();
         }
 
@@ -311,13 +313,14 @@ namespace Game2048_Model
             List<Coordinates> EmptyTilesCoords = this.field.FindEmptyCells();
             if (EmptyTilesCoords.Count() > 0)
             {
-                Coordinates newCellCoords = EmptyTilesCoords[rndNum.Next(0, EmptyTilesCoords.Count() - 1)];
+                Coordinates newTileCoords = EmptyTilesCoords[rndNum.Next(0, EmptyTilesCoords.Count() - 1)];
                 int newValue;
                 if (rndNum.Next(0, 100) <= 70)
                     newValue = 2;
                 else
                     newValue = 4;
-                this.field.Set(newCellCoords, newValue);
+                this.field.Set(newTileCoords, newValue);
+                this.LastGeneratedTileCoords.Set(newTileCoords);
             }
 
         }
