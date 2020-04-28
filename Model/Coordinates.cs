@@ -29,5 +29,20 @@ namespace Game2048_Model
         {
             return "H: " + this.Horizontal + "; V: " + this.Vertical;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Coordinates coordinates &&
+                   Horizontal == coordinates.Horizontal &&
+                   Vertical == coordinates.Vertical;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1238135884;
+            hashCode = hashCode * -1521134295 + Horizontal.GetHashCode();
+            hashCode = hashCode * -1521134295 + Vertical.GetHashCode();
+            return hashCode;
+        }
     }
 }
