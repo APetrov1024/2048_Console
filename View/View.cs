@@ -22,7 +22,7 @@ namespace Game2048_View
         public void Display()
         {
             Console.Clear();
-            ShowGrid(model.HSize, model.VSize);
+            ShowGrid(this.model.HSize, this.model.VSize);
             Console.SetCursorPosition(0, this.messageY);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Управляйте клавишами стрелок. Для выхода нажмите Esc. Для перезапуска игры нажмите F5.");
@@ -67,7 +67,7 @@ namespace Game2048_View
                             Console.ForegroundColor = ConsoleColor.Green;
                             if (this.model.LastGeneratedTileCoords.Equals(displayedValueCoords))
                                 Console.ForegroundColor = ConsoleColor.Red;
-                            Console.SetCursorPosition(left * (hCellSize - 1) + 2, top * (vCellSize - 1) + 2);
+                            Console.SetCursorPosition(left * (this.hCellSize - 1) + 2, top * (this.vCellSize - 1) + 2);
                             Console.Write(this.model.Get(displayedValueCoords));
                         }
                     }
