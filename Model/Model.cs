@@ -140,6 +140,7 @@ namespace Game2048_Model
                     {
                         this.field.Set(curCoords, 2 * curValue);
                         this.field.Set(nextCoords, 0);
+                        this.isMoved = true;
                     }
                 }
             // при объединении появились нули между значениями
@@ -159,6 +160,7 @@ namespace Game2048_Model
                     {
                         this.field.Set(curCoords, 2 * curValue);
                         this.field.Set(nextCoords, 0);
+                        this.isMoved = true;
                     }
                 }
             // при объединении появились нули между значениями
@@ -178,6 +180,7 @@ namespace Game2048_Model
                     {
                         this.field.Set(curCoords, 2 * curValue);
                         this.field.Set(nextCoords, 0);
+                        this.isMoved = true;
                     }
                 }
             // при объединении появились нули между значениями
@@ -197,6 +200,7 @@ namespace Game2048_Model
                     {
                         this.field.Set(curCoords, 2 * curValue);
                         this.field.Set(nextCoords, 0);
+                        this.isMoved = true;
                     }
                 }
             // при объединении появились нули между значениями
