@@ -319,7 +319,7 @@ namespace Game2048_Model
             {
                 Coordinates newTileCoords = EmptyTilesCoords[rndNum.Next(0, EmptyTilesCoords.Count() - 1)];
                 int newValue;
-                if (rndNum.Next(0, 100) <= 70)
+                if (rndNum.Next(0, 100) <= 85)
                     newValue = 2;
                 else
                     newValue = 4;
