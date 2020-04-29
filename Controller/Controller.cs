@@ -15,15 +15,22 @@ namespace Game2048_Controller
         private Model model;
         private View view;
         private bool isNotExitCommandRecived = true;
-        private InputHandler inputHandler;
+        private int targetValue;
+        private InputHandler inputHandler = new InputHandler();;
         private GameStates GameState { get; set; }
 
         public Controller()
         {
-            inputHandler = new InputHandler();
-            model = new Model(4);
-            view = new View(model);
-            this.isNotExitCommandRecived = true;
+            this.targetValue = 2048;
+            this.model = new Model(4);
+            this.view = new View(this.model);
+        }
+
+        public Controller(int hFieldSize, int vFieldSize, int targetValue)
+        {
+            this.targetValue = targetValue;
+            this.model = new Model(hFieldSize, vFieldSize);
+            this.view = new View(this.model);
         }
 
         public void StartGame()
@@ -59,7 +66,7 @@ namespace Game2048_Controller
                 this.view.Display();
                 Actions userAction = this.inputHandler.Listen();
                 DoAction(userAction);
-                if (this.model.IsHaveValue(2048))
+                if (this.model.IsHaveValue(this.targetValue))
                     this.GameState = GameStates.Win;
                 if (this.model.IsHasNotMoves())
                     this.GameState = GameStates.Fail;
