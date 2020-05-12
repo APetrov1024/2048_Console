@@ -16,7 +16,7 @@ namespace Game2048_Controller
         private View view;
         private bool isNotExitCommandRecived = true;
         private int targetValue;
-        private InputHandler inputHandler = new InputHandler();;
+        private InputHandler inputHandler = new InputHandler();
         private GameStates GameState { get; set; }
 
         public Controller()
